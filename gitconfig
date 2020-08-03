@@ -1,0 +1,15 @@
+[user]
+	name = Leon Feng
+	email = leon@feng.am
+[core]
+	editor = nvim -u NONE
+[credential]
+	helper = manager
+[difftool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE
+[diff]
+	tool = nvim
+[mergetool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[merge]
+	tool = nvim
