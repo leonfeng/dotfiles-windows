@@ -2,7 +2,8 @@
 	name = Leon Feng
 	email = leon@feng.am
 [core]
-	editor = nvim -u NONE
+	editor = nvim
+	autocrlf = false
 [credential]
 	helper = manager
 [difftool "nvim"]
