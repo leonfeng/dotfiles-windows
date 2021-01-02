@@ -8,6 +8,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'andrewradev/splitjoin.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'honza/vim-snippets'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'jxnblk/vim-mdx-js'
 Plug 'luochen1990/rainbow'
@@ -114,7 +115,7 @@ augroup end
 
 " vim-surround {{{2
 
-autocmd FileType vim,javascript,sh let b:comChar = g:commentChar[&ft] |
+autocmd FileType javascript,rescript,sh,vim let b:comChar = g:commentChar[&ft] |
 			\ let b:surround_{char2nr('z')}=b:comChar." {{{ \r ".b:comChar."  }}}" |
 			\ let b:surround_{char2nr('Z')}=b:comChar." SECTION {{{LEVEL \r ".b:comChar." SECTION LEVEL}}}" |
 
@@ -312,6 +313,29 @@ nmap , <Plug>(coc-smartf-repeat-opposite)
 
 " CoC 2}}}
 
+" coc-fzf-preview {{{2
+
+nmap <Leader>p [fzf-p]
+xmap <Leader>p [fzf-p]
+
+nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>CocCommand fzf-preview.FromResources buffer project_mru<CR>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>CocCommand fzf-preview.Changes<CR>
+nnoremap <silent> [fzf-p]/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+xnoremap          [fzf-p]gr    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
+
+" coc-fzf-preview 2}}}
+
 " vim-easy-align {{{2
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -424,9 +448,10 @@ set completeopt+=preview
 " vim-surround {{{2
 
 let g:commentChar = {
-			\ 'vim': '"',
 			\ 'javascript': '//',
+			\ 'rescript': '//',
 			\ 'sh': '#',
+			\ 'vim': '"',
 			\}
 
 " vim-surround 2}}}
