@@ -2,10 +2,22 @@
 	name = Leon Feng
 	email = leon@feng.am
 [core]
-	editor = nvim
+	editor = nvim -u NONE
 	autocrlf = false
 [credential]
 	helper = manager
+[alias]
+	aa = add --all
+	ba = branch -a
+	cb = checkout -b
+	cm = checkout master
+	cd = checkout develop
+	cmsg = commit -m
+	co = checkout
+	gl = pull origin $(current_branch)
+	gp = push origin $(current_branch)
+	glog = log --oneline --decorate --graph
+	st = status
 [difftool "nvim"]
 	cmd = nvim -d $LOCAL $REMOTE
 [diff]
@@ -14,3 +26,4 @@
 	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [merge]
 	tool = nvim
+
